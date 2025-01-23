@@ -50,48 +50,24 @@ class QueryBuilder {
   }
 
   select(...fields: string[]): QueryBuilder {
-    this.fields = fields;
-    return this;
+    throw new Error('Method not implemented.');
   }
 
   where(condition: string): QueryBuilder {
-    this.conditions.push( condition );
-    return this;
+    throw new Error('Method not implemented.');
   }
 
   orderBy(field: string, direction: 'ASC' | 'DESC' = 'ASC'): QueryBuilder {
-    
-    this.orderFields.push(`order by ${ field } ${direction}`);
-
-    return this;
+    throw new Error('Method not implemented.');
   }
 
   limit(count: number): QueryBuilder {
-    this.limitCount = count;
-    return this;
+    throw new Error('Method not implemented.');
   }
 
   execute(): string {
-    
-    const fields = this.fields.length > 0 ? this.fields.join(', ') : '*';
-    
-    const whereClause =
-      this.conditions.length > 0
-        ? `WHERE ${ this.conditions.join(' AND ') }`
-        : ' ';
-
-    const orderByClause = this.orderFields.length > 0
-      ? `ORDER BY ${ this.orderFields.join(', ')}`
-      : '';
-      /*
-      Nota:
-      En el ejercicio anterior para que el query sea válido simplemente deben de eliminar en el método orderBy el string order by que colocamos para que no se repita por cada campo que se inserte.
-      */
-
-    const limitClause = this.limitCount ? `LIMIT ${this.limitCount}` : '';
-
-    return `Select ${fields} from ${this.table} ${whereClause} ${orderByClause} ${limitClause};`
-
+    // Select id, name, email from users where age > 18 and country = 'Cri' order by name ASC limit 10;
+    throw new Error('Method not implemented.');
   }
 }
 
@@ -99,7 +75,7 @@ function main() {
   const usersQuery = new QueryBuilder('users')
     .select('id', 'name', 'email')
     .where('age > 18')
-    .where("country = 'México'") // Esto debe de hacer una condición AND
+    .where("country = 'Cri'") // Esto debe de hacer una condición AND
     .orderBy('name', 'ASC')
     .limit(10)
     .execute();
